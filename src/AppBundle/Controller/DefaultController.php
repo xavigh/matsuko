@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use AppBundle\Entity\Dish;
 
 class DefaultController extends Controller
 {
@@ -14,6 +15,10 @@ class DefaultController extends Controller
     public function homeAction(Request $request)
     {
         // replace this example code with whatever you need
+        $dishesRepo = $this->getDoctrine()->getRepository(Dish::class);
+        // finds *all* products
+        $dishes = $dishesRepo->findAll();
+        var_dump($dishes);
         return $this->render('frontal/index.html.twig' );
     }
 
@@ -26,6 +31,15 @@ class DefaultController extends Controller
         return $this->render('frontal/about.html.twig' );
     }
 
+    /**
+     * @Route("/carta/{numCarta}", name="carta")
+     */
+    public function cartaAction(Request $request, $numCarta="show_all")
+    {
+        // replace this example code with whatever you need
+        return $this->render('frontal/carta.html.twig', array('numCarta'=>$numCarta) );
+    }
+
      /**
      * @Route("/menus/{numMenu}", name="menus")
      */
@@ -34,6 +48,8 @@ class DefaultController extends Controller
         // replace this example code with whatever you need
         return $this->render('frontal/menus.html.twig', array('numMenu'=>$numMenu) );
     }
+
+    
 
     /**
      * @Route("/contact", name="contact")
