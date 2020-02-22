@@ -17,9 +17,9 @@ class DefaultController extends Controller
         // replace this example code with whatever you need
         $dishesRepo = $this->getDoctrine()->getRepository(Dish::class);
         // finds *all* products
-        $dishes = $dishesRepo->findAll();
-        var_dump($dishes);
-        return $this->render('frontal/index.html.twig' );
+        $dishes = $dishesRepo->findByTop(1);
+        //var_dump($dishes);
+        return $this->render('frontal/index.html.twig', array('dishes'=>$dishes) );
     }
 
     /**
@@ -48,8 +48,7 @@ class DefaultController extends Controller
         // replace this example code with whatever you need
         return $this->render('frontal/menus.html.twig', array('numMenu'=>$numMenu) );
     }
-
-    
+   
 
     /**
      * @Route("/contact", name="contact")
@@ -58,6 +57,26 @@ class DefaultController extends Controller
     {
         // replace this example code with whatever you need
         return $this->render('frontal/contact.html.twig' );
+    }
+
+    /**
+     * @Route("/dishItem/{id}", name="dishItem")
+     */
+    public function dishItemAction(Request $request,$id=null)
+    {
+        if( $id != null){
+             // replace this example code with whatever you need
+            $dishesRepo = $this->getDoctrine()->getRepository(Dish::class);
+            // finds *all* products
+            $dishItem = $dishesRepo->find($id);
+            //var_dump($dishes);
+            
+            return $this->render('frontal/dishItem.html.twig', array('dishItem'=>$dishItem) );
+
+        }else{
+            return $this->redirectToRoute('homepage');
+        }
+       
     }
 
 }
