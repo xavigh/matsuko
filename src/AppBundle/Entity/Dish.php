@@ -45,7 +45,7 @@ class Dish
     /**
      * @var string
      *
-     * @ORM\Column(name="picture", type="string", length=255)
+     * @ORM\Column(name="picture", type="text", length=255)
      */
     private $picture;
 

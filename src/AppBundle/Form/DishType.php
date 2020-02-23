@@ -18,6 +18,7 @@ class DishType extends AbstractType
             ->add('name', TextType::class)
             ->add('description', TextType::class)
             ->add('price', TextType::class)
+            ->add('ingredients', TextType::class)
             ->add('save', SubmitType::class, array('label' => 'nuevo plato'))
             ;
         
