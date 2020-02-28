@@ -1,37 +1,42 @@
 {% extends 'base.html.twig' %}
 {# title #}
-{% block title %} muestra plato {% endblock %}
+{% block title %} Song selected {% endblock %}
 {#  Page Content #}
 {% block body %}
+
 
 <!-- Page Content -->
   <div class="container">
 
     <!-- Page Heading/Breadcrumbs -->
-    <h1 class="mt-4 mb-3">Nuestros platos   
-    </h1>
-
-    
+    <h1 class="mt-4 mb-3">{{song.artistName }}
+    </h1>  
 
     <!-- Portfolio Item Row -->
     <div class="row">
 
       <div class="col-md-8">
-        <img class="img-fluid" src="http://placehold.it/750x500" alt="">
+        <DIV CLASS="VIDEO-CONTAINER"><IFRAME WIDTH="653" HEIGHT="380" SRC="https://www.youtube.com/embed/{{song.url}}" FRAMEBORDER="0" ALLOWFULLSCREEN></IFRAME></DIV>
+
+
       </div>
 
       <div class="col-md-4">
-        <h3 class="my-3">{{dishItem.name}}</h3>
-        <p>{{dishItem.description}}</p>
-        <h3 class="my-3">Ingredientes</h3>
-         	{{dishItem.Ingredients}}
+        
+        <h4 class="my-3">Album: {{ song.albumName }}</h3>
+        <h4 class="my-3">Track: {{ song.trackName }}</h3>
+        <p>{{song.description}}</p>
+        
+
+        
+         	
       </div>
 
     </div>
     <!-- /.row -->
 
     <!-- Related Projects Row -->
-    <h3 class="my-4">Nuestros platos</h3>
+    <h3 class="my-4">More songs</h3>
 
     <div class="row">
 

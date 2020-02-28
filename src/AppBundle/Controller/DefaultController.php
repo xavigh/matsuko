@@ -5,7 +5,7 @@ namespace AppBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use AppBundle\Entity\Dish;
+use AppBundle\Entity\MusicApp;
 
 class DefaultController extends Controller
 {
@@ -15,11 +15,11 @@ class DefaultController extends Controller
     public function homeAction(Request $request)
     {
         // replace this example code with whatever you need
-        $dishesRepo = $this->getDoctrine()->getRepository(Dish::class);
+        $musicRepo = $this->getDoctrine()->getRepository(MusicApp::class);
         // finds *all* products
-        $dishes = $dishesRepo->findByTop(1);
-        //var_dump($dishes);
-        return $this->render('frontal/index.html.twig', array('dishes'=>$dishes) );
+        $songs = $musicRepo->findAll();
+        //var_dump($songs);
+        return $this->render('frontal/index.html.twig', array('songs'=>$songs) );
     }
 
     /**
@@ -32,24 +32,15 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/carta/{numCarta}", name="carta")
+     * @Route("/playlist/{numPlayList}", name="playlist" )
      */
-    public function cartaAction(Request $request, $numCarta="show_all")
+    public function playlistAction(Request $request, $numPlayList="show_all")
     {
         // replace this example code with whatever you need
-        return $this->render('frontal/carta.html.twig', array('numCarta'=>$numCarta) );
+        return $this->render('frontal/playlist.html.twig', array('numPlayList'=>$numPlayList) );
     }
 
-     /**
-     * @Route("/menus/{numMenu}", name="menus")
-     */
-    public function menusAction(Request $request, $numMenu="show_all")
-    {
-        // replace this example code with whatever you need
-        return $this->render('frontal/menus.html.twig', array('numMenu'=>$numMenu) );
-    }
-   
-
+    
     /**
      * @Route("/contact", name="contact")
      */
@@ -60,18 +51,18 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/dishItem/{id}", name="dishItem")
+     * @Route("/songSelected/{id}", name="songSelected")
      */
-    public function dishItemAction(Request $request,$id=null)
+    public function songSelectedAction(Request $request,$id=null)
     {
         if( $id != null){
              // replace this example code with whatever you need
-            $dishesRepo = $this->getDoctrine()->getRepository(Dish::class);
+            $songsRepo = $this->getDoctrine()->getRepository(MusicApp::class);
             // finds *all* products
-            $dishItem = $dishesRepo->find($id);
+            $songId = $songsRepo->find($id);
             //var_dump($dishes);
             
-            return $this->render('frontal/dishItem.html.twig', array('dishItem'=>$dishItem) );
+            return $this->render( 'frontal/songSelected.html.twig', array('song'=>$songId ) );
 
         }else{
             return $this->redirectToRoute('homepage');

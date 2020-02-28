@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 {# title #}
-{% block title %} Bar Matsuko {% endblock %}
+{% block title %} SONGS APP {% endblock %}
 
 {% block body %}
 <header>
@@ -45,21 +45,24 @@
   </header>
   <!-- Page Content -->
   <div class="container">
-  <h1 class="my-4">platos nuevos</h1>
+  <h1 class="my-4">favorite songs</h1>
 
   
 
     <div class="row">
-     {% for dish in dishes %}
+     {% for track in songs %}
 
         <div class="col-lg-4 col-sm-6 portfolio-item">
               <div class="card h-100">
-                <a href="{{ path('dishItem',{'id':dish.id}) }}"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+               
+                    <IFRAME  SRC="https://www.youtube.com/embed/{{track.url}}" FRAMEBORDER="0" ALLOWFULLSCREEN></IFRAME>
+          
                 <div class="card-body">
                   <h4 class="card-title">
-                    <a href="{{ path('dishItem',{'id':dish.id}) }}" >{{dish.name}}</a>
+                    <a href="{{ path('songSelected',{'id':track.id}) }}"> {{track.trackName}}</a>
                   </h4>
-                  <p class="card-text">{{dish.description}}</p>
+                  <p class="card-text">{{  track.description  }}</p>
+                 
                 </div>
               </div>
         </div>

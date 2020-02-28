@@ -28,31 +28,20 @@
           
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Carta
+              play list
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
-              <a class="dropdown-item" href="{{ path('carta',{ 'numCarta':'carta1'}) }}">carta 1</a>
-              <a class="dropdown-item" href="{{ path('carta',{ 'numCarta':'carta2'}) }}">carta 2</a>
-              <a class="dropdown-item" href="{{ path('carta',{ 'numCarta':'carta3'}) }}">carta 3</a>
-             
-              
+              <a class="dropdown-item" href="{{ path('playlist',{ 'numPlayList':'playlist1'}) }}">play list 1</a>
+              <a class="dropdown-item" href="{{ path('playlist',{ 'numPlayList':'playlist2'}) }}">play list 2</a>
+              <a class="dropdown-item" href="{{ path('playlist',{ 'numPlayList':'playlist3'}) }}">play list 3</a>             
             </div>
           </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Menus
-            </a>
-            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
-              <a class="dropdown-item" href="{{ path('menus',{ 'numMenu':'menu1'}) }}">menu 1</a>
-              <a class="dropdown-item" href="{{ path('menus',{ 'numMenu':'menu2'}) }}">menu 2</a>
-              <a class="dropdown-item" href="{{ path('menus',{ 'numMenu':'menu3'}) }}">menu 3</a>
-            </div>
+         
+          <li class="nav-item">
+            <a class="nav-link" href="{{  path('contact')  }}">Contact</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{ path('contact') }}">Contacto</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Reservas</a>
+            <a class="nav-link" href="{{ path('addsong')}}">Add Songs</a>
           </li>
         </ul>
       </div>

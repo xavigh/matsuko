@@ -1,10 +1,15 @@
 {% extends 'base.html.twig' %}
 {# title #}
-{% block title %} muestra plato {% endblock %}
+{% block title %} Add new songs {% endblock %}
 {#  Page Content #}
 {% block body %}
 {# app/Resources/views/default/new.html.twig #}
+<div class="container p-5">
+
+
 {{ form_start(form) }}
 {{ form_widget(form) }}
 {{ form_end(form) }}
+
+</div>
 {% endblock %}
