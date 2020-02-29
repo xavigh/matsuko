@@ -64,4 +64,25 @@ class ManageSongController extends Controller
         
 
     }
+
+      /**
+     * @Route("/songSelected/{id}", name="songSelected")
+     */
+    public function songSelectedAction(Request $request,$id=null)
+    {
+        if( $id != null){
+             // replace this example code with whatever you need
+            $songsRepo = $this->getDoctrine()->getRepository(MusicApp::class);
+            // finds *all* products
+            $songId = $songsRepo->find($id);
+            // var_dump($songId);
+           
+            return $this->render( 'frontal/songSelected.html.twig', array('song'=>$songId ) );
+            
+
+        }else{
+            return $this->redirectToRoute('homepage');
+        }
+       
+    }
 }
