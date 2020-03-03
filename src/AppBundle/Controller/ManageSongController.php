@@ -7,6 +7,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use AppBundle\Entity\MusicApp;
 use AppBundle\Form\MusicType;
+use AppBundle\Form\CategoryType;
+use AppBundle\Entity\Category;
 
 
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -36,20 +38,11 @@ class ManageSongController extends Controller
          $form->handleRequest($request);
          
          if ($form->isSubmitted() && $form->isValid()) {
-            // $form->getData() holds the submitted values
-            // but, the original `$task` variable has also been updated
+           
             $song = $form->getData();
-            // $song->setArtistName(" ");
-            // $song->setAlbumName(" ");
-            // $song->setTrackName(" ");            
-            // $song->setDescription(" ");            
-            // $song->setUrl(" ");
-            // $song->setPictureArtist(" ");
-            $song->setCreationDate(new \DateTime());
-            // $song->setTopFavorite(" ");
-            // $song->setClaveApi(" ");
-            // $song->setOuth2Token(" ");
             
+            $song->setCreationDate(new \DateTime());
+          
             // ... perform some action, such as saving the task to the database
             // for example, if Task is a Doctrine entity, save it!
             $em = $this->getDoctrine()->getManager();
@@ -63,26 +56,37 @@ class ManageSongController extends Controller
          return $this->render('manageSongs/newSong.html.twig', array(  'form' => $form->createView()  ));
         
 
-    }
+        }
+
 
       /**
-     * @Route("/songSelected/{id}", name="songSelected")
+     * @Route("/newCategory", name="newCategory")
      */
-    public function songSelectedAction(Request $request,$id=null)
+    public function newSongAction(Request $request)
     {
-        if( $id != null){
-             // replace this example code with whatever you need
-            $songsRepo = $this->getDoctrine()->getRepository(MusicApp::class);
-            // finds *all* products
-            $songId = $songsRepo->find($id);
-            // var_dump($songId);
+        $category = new Category();         
+        $form = $this->createForm(CategoryType::class, $category);
+        
+        $form->handleRequest($request);
+        
+        if ($form->isSubmitted() && $form->isValid()) {
+          
+           $category = $form->getData();
            
-            return $this->render( 'frontal/songSelected.html.twig', array('song'=>$songId ) );
-            
+        
+         
+           // ... perform some action, such as saving the task to the database
+           // for example, if Task is a Doctrine entity, save it!
+           $em = $this->getDoctrine()->getManager();
+           $em->persist($category);
+           $em->flush();
+   
+           return $this->redirectToRoute('categorySelected',array( 'id'=>$category->getId() ));
 
-        }else{
-            return $this->redirectToRoute('homepage');
-        }
-       
     }
+           return $this->render('manageSongs/newCategory.html.twig', array(  'form' => $form->createView()  ));
+    }
+
+
+    
 }

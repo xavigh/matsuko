@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+{# title #}
+{% block title %} Category selected {% endblock %}
+{#  Page Content #}
+{% block body %}
+
+
+<!-- Page Content -->
+  <div class="container">
+ 
+    <!-- Page Heading/Breadcrumbs -->
+    <h1 class="mt-4 mb-3">New Category added :
+    </h1>  
+    <h2> {{category.name }}</h2>
+
+    <!-- Portfolio Item Row -->
+    <div class="row">
+
+     
+
+      <div class="col-md-4">
+      
+        <h4 class="my-3">Description: {{ category.description }}</h3>
+        
+       
+
+        
+         	
+      </div>
+
+    </div>
+    <!-- /.row -->
+
+    
+
+  </div>
+  <!-- /.container -->
+
+{% endblock %}

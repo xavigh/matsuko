@@ -20,12 +20,10 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="{{ path('about') }}">About</a>
+        <ul class="navbar-nav ml-auto">        
+           <li class="nav-item">
+            <a class="nav-link" href="{{ path('homepage')}}">Home</a>
           </li>
-          
-          
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               play list
@@ -37,11 +35,15 @@
             </div>
           </li>
          
-          <li class="nav-item">
-            <a class="nav-link" href="{{  path('contact')  }}">Contact</a>
-          </li>
+          
           <li class="nav-item">
             <a class="nav-link" href="{{ path('addsong')}}">Add Songs</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ path('newCategory') }}">Add Category</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{  path('contact')  }}">Contact</a>
           </li>
         </ul>
       </div>
