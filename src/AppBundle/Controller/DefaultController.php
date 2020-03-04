@@ -11,16 +11,26 @@ use AppBundle\Entity\Category;
 class DefaultController extends Controller
 {
     /**
-     * @Route("/", name="homepage")
+     * @Route("/{page}", name="homepage")
      */
-    public function homeAction(Request $request)
+    public function homeAction(Request $request, $page = 1)
     {
         // replace this example code with whatever you need
         $musicRepo = $this->getDoctrine()->getRepository(MusicApp::class);
         // finds *all* products
-        $songs = $musicRepo->findAll();
-        //var_dump($songs);
-        return $this->render('frontal/index.html.twig', array('songs'=>$songs) );
+       // $songs = $musicRepo->findByTop(1);
+ 
+        $numMaxSongs = 3;
+        // createQueryBuilder() automatically selects FROM AppBundle:Product
+        // and aliases it to "p"
+        $query = $musicRepo->createQueryBuilder('s')
+        ->where('s.topFavorite = 1')
+        ->setFirstResult($numMaxSongs * ($page-1))
+        ->setMaxResults($numMaxSongs)
+        ->getQuery();
+        $songs = $query->getResult();
+    
+        return $this->render('frontal/index.html.twig', array( 'songs'=>$songs, 'numMaxSongs'=>$numMaxSongs, 'currentPage'=>$page) );
     }
 
     /**

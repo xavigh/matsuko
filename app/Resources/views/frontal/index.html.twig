@@ -45,7 +45,7 @@
   </header>
   <!-- Page Content -->
   <div class="container">
-  <h1 class="my-4">favorite songs</h1>
+  <h1 class="my-4">Favorite songs</h1>
 
   
 
@@ -76,27 +76,28 @@
     <!-- /.row -->
      <!-- Pagination -->
     <ul class="pagination justify-content-center">
+     {% if currentPage >1 %}
       <li class="page-item">
-        <a class="page-link" href="#" aria-label="Previous">
+        <a class="page-link" href="{{path('homepage', {page: (currentPage-1) < 1? 1 :  currentPage-1 } )}}" aria-label="Previous">
           <span aria-hidden="true">&laquo;</span>
           <span class="sr-only">Previous</span>
         </a>
       </li>
+      {% endif %}
+      {% for i in 1.. numMaxSongs %}
       <li class="page-item">
-        <a class="page-link" href="#">1</a>
+        <a class="page-link" href="{{ path('homepage', {page:i}) }}">{{i}}</a>
       </li>
+      {% endfor %}
+
+      {% if currentPage < numMaxSongs %}
       <li class="page-item">
-        <a class="page-link" href="#">2</a>
-      </li>
-      <li class="page-item">
-        <a class="page-link" href="#">3</a>
-      </li>
-      <li class="page-item">
-        <a class="page-link" href="#" aria-label="Next">
+        <a class="page-link" href="{{path('homepage', {page: (currentPage + 1) <= numMaxSongs ? currentPage + 1 : currentPage  } )}}" aria-label="Next">
           <span aria-hidden="true">&raquo;</span>
           <span class="sr-only">Next</span>
         </a>
       </li>
+       {% endif %}
     </ul>
 
   </div>
