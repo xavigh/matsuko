@@ -15,21 +15,16 @@ class DefaultController extends Controller
      */
     public function homeAction(Request $request, $page = 1)
     {
+        //constant value of numMaxSongs
+        $numMaxSongs = 3; 
+        
+
         // replace this example code with whatever you need
         $musicRepo = $this->getDoctrine()->getRepository(MusicApp::class);
-        // finds *all* products
-       // $songs = $musicRepo->findByTop(1);
- 
-        $numMaxSongs = 3;
-        // createQueryBuilder() automatically selects FROM AppBundle:Product
-        // and aliases it to "p"
-        $query = $musicRepo->createQueryBuilder('s')
-        ->where('s.topFavorite = 1')
-        ->setFirstResult($numMaxSongs * ($page-1))
-        ->setMaxResults($numMaxSongs)
-        ->getQuery();
-        $songs = $query->getResult();
-    
+                     
+        // calling the repository function pageSongs to get the songs elements per page to do pagination
+        $songs = $musicRepo->paginationElements($page);
+
         return $this->render('frontal/index.html.twig', array( 'songs'=>$songs, 'numMaxSongs'=>$numMaxSongs, 'currentPage'=>$page) );
     }
 

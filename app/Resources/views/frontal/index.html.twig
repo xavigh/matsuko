@@ -63,7 +63,7 @@
                   <h4 class="card-title">
                     <a href="{{ path('songSelected',{'id':track.id}) }}"> {{track.trackName}}</a>
                   </h4>
-                  <p class="card-text">{{  track.description  }}</p>
+                  <p class="card-text">{{ track.description }}</p>
                  
                 </div>
               </div>
@@ -76,6 +76,7 @@
     <!-- /.row -->
      <!-- Pagination -->
     <ul class="pagination justify-content-center">
+
      {% if currentPage >1 %}
       <li class="page-item">
         <a class="page-link" href="{{path('homepage', {page: (currentPage-1) < 1? 1 :  currentPage-1 } )}}" aria-label="Previous">
@@ -84,11 +85,13 @@
         </a>
       </li>
       {% endif %}
+
       {% for i in 1.. numMaxSongs %}
       <li class="page-item">
         <a class="page-link" href="{{ path('homepage', {page:i}) }}">{{i}}</a>
       </li>
       {% endfor %}
+
 
       {% if currentPage < numMaxSongs %}
       <li class="page-item">
@@ -97,7 +100,8 @@
           <span class="sr-only">Next</span>
         </a>
       </li>
-       {% endif %}
+      {% endif %}
+
     </ul>
 
   </div>
