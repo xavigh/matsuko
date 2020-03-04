@@ -11,9 +11,9 @@ use AppBundle\Entity\Category;
 class DefaultController extends Controller
 {
     /**
-     * @Route("/{page}", name="homepage")
+     * @Route("/{pageNum}", name="homepage")
      */
-    public function homeAction(Request $request, $page = 1)
+    public function homeAction(Request $request, $pageNum = 1)
     {
         //constant value of numMaxSongs
         $numMaxSongs = 3; 
@@ -23,9 +23,9 @@ class DefaultController extends Controller
         $musicRepo = $this->getDoctrine()->getRepository(MusicApp::class);
                      
         // calling the repository function pageSongs to get the songs elements per page to do pagination
-        $songs = $musicRepo->paginationElements($page);
+        $songs = $musicRepo->paginationElements($pageNum);
 
-        return $this->render('frontal/index.html.twig', array( 'songs'=>$songs, 'numMaxSongs'=>$numMaxSongs, 'currentPage'=>$page) );
+        return $this->render('frontal/index.html.twig', array( 'songs'=>$songs, 'numMaxSongs'=>$numMaxSongs, 'currentPage'=>$pageNum) );
     }
 
     /**
@@ -48,7 +48,7 @@ class DefaultController extends Controller
 
     
     /**
-     * @Route("/contact", name="contact")
+     * @Route("/home/contact", name="contact")
      */
     public function contactAction(Request $request)
     {
