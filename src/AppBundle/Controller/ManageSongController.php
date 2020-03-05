@@ -24,7 +24,7 @@ class ManageSongController extends Controller
     /**
      * @Route("/addsong", name="addsong")
      */
-    public function manageSongAction(Request $request)
+    public function addSongAction(Request $request)
     {
         // if(!is_null($request)){
         //     $reqData = $request->request->all();
@@ -37,53 +37,79 @@ class ManageSongController extends Controller
          
          $form->handleRequest($request);
          
-         if ($form->isSubmitted() && $form->isValid()) {
-           
-            $song = $form->getData();
+            if ($form->isSubmitted() && $form->isValid()) {
             
-            $song->setCreationDate(new \DateTime());
-          
-            // ... perform some action, such as saving the task to the database
-            // for example, if Task is a Doctrine entity, save it!
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($song);
-            $em->flush();
-    
-            return $this->redirectToRoute('songSelected',array( 'id'=>$song->getId() ));
-        }
+                $song = $form->getData();
+                
+                $song->setCreationDate(new \DateTime());
+            
+                // ... perform some action, such as saving the task to the database
+                // for example, if Task is a Doctrine entity, save it!
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($song);
+                $em->flush();
+        
+                return $this->redirectToRoute('songSelected',array( 'id'=>$song->getId() ));
+            }
            
        //if no form submitted to Request then show form to fill in the user  
          return $this->render('manageSongs/newSong.html.twig', array(  'form' => $form->createView()  ));
         
 
-        }
+    }
+
+     /**
+     * @Route("/deletesong/{id}", name="deletesong")
+     */
+    public function deleteSongAction(Request $request, $id=null)
+    {
+        // if(!is_null($request)){
+        //     $reqData = $request->request->all();
+        //     var_dump($reqData);
+        // }
+
+        
+        $entityManager = $this->getDoctrine()->getManager();
+        $song = $entityManager->getRepository(MusicApp::class)->find($id);
+        
+            if (!$id) {
+                throw $this->createNotFoundException(
+                    'No product found for id '.$id
+                );
+            }
+        
+        $entityManager->remove($song);
+        $entityManager->flush();
+    
+        return $this->redirectToRoute('homepage');
+      
+    }
 
 
       /**
      * @Route("/newCategory", name="newCategory")
      */
-    public function newSongAction(Request $request)
+    public function newCategoryAction(Request $request)
     {
         $category = new Category();         
         $form = $this->createForm(CategoryType::class, $category);
         
         $form->handleRequest($request);
         
-        if ($form->isSubmitted() && $form->isValid()) {
-          
-           $category = $form->getData();
+                    if ($form->isSubmitted() && $form->isValid()) {
+                    
+                    $category = $form->getData();
            
-        
-         
-           // ... perform some action, such as saving the task to the database
-           // for example, if Task is a Doctrine entity, save it!
-           $em = $this->getDoctrine()->getManager();
-           $em->persist($category);
-           $em->flush();
-   
-           return $this->redirectToRoute('categorySelected',array( 'id'=>$category->getId() ));
+                    // ... perform some action, such as saving the task to the database
+                    // for example, if Task is a Doctrine entity, save it!
+                    $em = $this->getDoctrine()->getManager();
+                    $em->persist($category);
+                    $em->flush();
+            
+                    return $this->redirectToRoute('categorySelected',array( 'id'=>$category->getId() ));
 
-    }
+                }
+
            return $this->render('manageSongs/newCategory.html.twig', array(  'form' => $form->createView()  ));
     }
 
