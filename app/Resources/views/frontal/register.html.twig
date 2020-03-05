@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+{% form_theme form 'form/fieldForm.html.twig' %}
+{# title #}
+{% block title %} User Registration {% endblock %}
+
+{#  Page Content #}
+{% block body %}
+<div class="container">
+
+ <!-- Page Heading/Breadcrumbs -->
+    <h1 class="mt-4 mb-3">My Music App
+      <small>User registration</small>      
+    </h1>
+
+ <!-- Intro Content -->
+    <div class="row">
+      <div class="col-lg-6">
+     
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        {{ form_end(form) }}
+       
+      </div>
+      <div class="col-lg-6">
+        <h2>Music App</h2>
+        <p> With the regigistration you will be able to create play lists ... </p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe, magni, aperiam vitae illum voluptatum aut sequi impedit non velit ab ea pariatur sint quidem corporis eveniet. Odit, temporibus reprehenderit dolorum!</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et, consequuntur, modi mollitia corporis ipsa voluptate corrupti eum ratione ex ea praesentium quibusdam? Aut, in eum facere corrupti necessitatibus perspiciatis quis?</p>
+      </div>
+    </div>
+    <!-- /.row -->    
+
+</div>
+
+{% endblock %}
