@@ -35,14 +35,14 @@ class ManageSongController extends Controller
                 if ($id) {
                     $song = $em->getRepository(MusicApp::class)->findOneById($id);
                 }
-         
-         if (!$song){
-                $song = new MusicApp();         
-         }
+                // if no song create song object
+                if (!$song){
+                        $song = new MusicApp();         
+                }
          
          $form = $this->createForm(MusicType::class, $song);
          
-         $form->handleRequest($request);
+         $form->handleRequest($request);  
          
             if ($form->isSubmitted() && $form->isValid()) {
             
@@ -94,11 +94,23 @@ class ManageSongController extends Controller
 
 
       /**
-     * @Route("/newCategory", name="newCategory")
+     * @Route("/newCategory/{id}", name="newCategory", defaults={"id": null}))
      */
-    public function newCategoryAction(Request $request)
+    public function newCategoryAction(Request $request, $id = null)
     {
-        $category = new Category();         
+
+        $category = null;
+        $em = $this->getDoctrine()->getManager();
+        
+        if ($id) {
+            $category = $em->getRepository(Category::class)->findOneById($id);
+        }
+        // if no song create song object
+        if (!$category){
+                $category = new Category();         
+        }
+ 
+          
         $form = $this->createForm(CategoryType::class, $category);
         
         $form->handleRequest($request);

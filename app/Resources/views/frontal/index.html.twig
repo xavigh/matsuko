@@ -47,13 +47,21 @@
   
   <!-- Page Content -->
   <div class="container">
-  <h1 class="my-4">Favorite songs</h1>
-
-  <div class="row ">
-        <div class="col-md-8">
-         Display number of songs: <input type="text" id="numSongsDisplay" name="songsPage"><br><br>
-        </div>
+  <div class="">
+    <h1 class="my-4 d-inline">Favorite songs</h1>
+          <span class="float-lg-right p-2">
+          Search<input class="" type="text" id="searchInput" name="searchName">
+          </span>
     </div>
+
+    <div class="row continer">
+          <div class="col-md-8 m-3">
+          <span class="">
+          Number of songs per page<input type="text" id="numSongsDisplay" name="songsPage">
+          </span>
+          
+          </div>
+      </div>
 
     <div class="row">
 
@@ -69,11 +77,15 @@
                   <h4 class="card-title">
                     <a href="{{ path('songSelected',{'id':track.id}) }}"> {{track.trackName}}</a>
                   </h4>
-                  <p class="card-text">{{ track.description }}</p>
+                  <p class="card-text">{{ track.description }}</p>                  
                  
                 </div>
-                <a href="{{ path('deletesong',{'id':track.id}) }}"> Delete</a>
+                <span class="pl-2 pb-2 ">
+                  <a href="{{ path('deletesong',{'id':track.id}) }}"> Delete |</a>
+                  <a href="{{ path('addsong',{'id':track.id}) }}"> Edit</a>
+                  </span>
               </div>
+                 
         </div>
 
   {% endfor %}

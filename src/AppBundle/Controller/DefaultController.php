@@ -21,14 +21,14 @@ class DefaultController extends Controller
     public function homeAction(Request $request, $pageNum = 1)
     {
         //constant value of numMaxSongs
-        $numMaxSongs = 3; 
-        
+        // do a form with a POST method to set the numMaxSong display per page by the user.
+        $numMaxSongs = 3;         
 
         // replace this example code with whatever you need
         $musicRepo = $this->getDoctrine()->getRepository(MusicApp::class);
                      
         // calling the repository function pageSongs to get the songs elements per page to do pagination
-        $songs = $musicRepo->paginationElements($pageNum);
+        $songs = $musicRepo->paginationElements($pageNum, $numMaxSongs);
 
         return $this->render('frontal/index.html.twig', array( 'songs'=>$songs, 'numMaxSongs'=>$numMaxSongs, 'currentPage'=>$pageNum) );
     }

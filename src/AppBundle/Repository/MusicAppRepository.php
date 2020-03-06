@@ -11,10 +11,14 @@ namespace AppBundle\Repository;
 class MusicAppRepository extends \Doctrine\ORM\EntityRepository
 {
     
-    // THIS FUNCTION RETURNS the number of pages per page in the pagination component.
-    public function paginationElements($pageNum = 1 , $numMaxSongs= 3){
+    // THIS FUNCTION RETURNS the number of songs per page in the pagination component.
+    public function paginationElements($pageNum = 1 , $numMaxSongs=3){
 
-      
+        
+        
+        var_dump("var dump = ".$numMaxSongs);
+        
+
         
         $query = $this->createQueryBuilder('s')
         ->where('s.topFavorite = 1')
