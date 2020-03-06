@@ -22,17 +22,24 @@ use Symfony\Component\Form\Extension\Core\Type\TextArea;
 class ManageSongController extends Controller
 {
     /**
-     * @Route("/addsong", name="addsong")
+     * @Route("/addsong/{id}", name="addsong", defaults={"id": null})
      */
-    public function addSongAction(Request $request)
+    public function addSongAction($id=null, Request $request)
     {
         // if(!is_null($request)){
         //     $reqData = $request->request->all();
         //     var_dump($reqData);
         // }
-
-
-         $song = new MusicApp();         
+        $song = null;
+        $em = $this->getDoctrine()->getManager();
+                if ($id) {
+                    $song = $em->getRepository(MusicApp::class)->findOneById($id);
+                }
+         
+         if (!$song){
+                $song = new MusicApp();         
+         }
+         
          $form = $this->createForm(MusicType::class, $song);
          
          $form->handleRequest($request);
@@ -45,7 +52,7 @@ class ManageSongController extends Controller
             
                 // ... perform some action, such as saving the task to the database
                 // for example, if Task is a Doctrine entity, save it!
-                $em = $this->getDoctrine()->getManager();
+                
                 $em->persist($song);
                 $em->flush();
         
@@ -77,10 +84,10 @@ class ManageSongController extends Controller
                     'No product found for id '.$id
                 );
             }
-        
-        $entityManager->remove($song);
-        $entityManager->flush();
-    
+        if ($song){
+            $entityManager->remove($song);
+            $entityManager->flush();
+        }
         return $this->redirectToRoute('homepage');
       
     }
